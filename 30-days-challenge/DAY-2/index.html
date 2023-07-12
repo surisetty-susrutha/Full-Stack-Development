@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title> Day-2 $usruth Chocolate Calculator</title>
+  <style>
+
+#sol {
+  font-weight: bold;
+  font-size: 20px;
+}
+#container
+{
+    margin-top:40px;
+    margin-left:300px;
+
+    background-color:rgb(224, 224, 214);
+    width: 45%;
+      height:480px;
+}
+#c1
+{
+width:70px;
+
+}
+    body {      
+        margin:0px;  
+      background-color:black;
+}
+p {
+ margin-left:40px;
+  font-family: times new roman;
+  color:rgb(4, 38, 71);
+}
+h1 {
+  text-align: center;
+  font-family: times new roman;
+  color:rgb(4, 38, 71);
+}
+form {
+  margin-top: 20px;
+}
+label {
+  display: block;
+  margin-bottom: 16px;
+  margin-left: 46px;
+}
+input, textarea {
+  width: 70%;
+  padding: 6px;
+  margin-left: 46px;
+  border: 1px solid #ccc;
+}
+button {
+    padding: 6px;
+  margin-left: 356px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius:12px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  width: 76px;
+height: 33px;
+  cursor: pointer;
+}
+button:hover{
+    width: 82px;
+height: 36px;
+transition:1s all;
+}
+
+
+
+  </style>
+</head>
+<body>
+    <div id="container"><br>
+  <h1 align="center">$usruth Chocolate Calculator</h1><br><br>
+
+    <label for="amount">Enter Total Amount : </label>
+    <input type="number" name="money" id="amount"><br><br>
+    <label for="t">Enter cost of each chocolate : </label>
+    <input type="number" name="cost" id="cost"><br><br><br>
+    <button onclick="calculate()">Calculate</button><br><br><br>
+  <p><b>The maximum number of chocolates $usruth can eat is :   <span id="sol"> 
+  </span></b></p>
+  
+</div>
+  <script>
+function calculate() {
+  const money = document.getElementById("amount").value;
+  const cost = document.getElementById("cost").value;
+  const maxChocolates = Math.floor(money / cost) + Math.floor(money / (cost * 3));
+  document.getElementById("sol").innerHTML = maxChocolates;
+}
+  </script>
+</body>
+</html>s
