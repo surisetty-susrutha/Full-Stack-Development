@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+background-image: url('a.jpg');
+background-size:100%;
+            
+background-repeat: no-repeat;
+           
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+       
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size:30px;
+            margin-bottom:70px;
+            font-family:'Times New Roman', Times, serif;
+            text-align: center;
+            color: #fbdec5;
+        }
+
+        input[type="text"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom:60px;
+        }
+
+        #output {
+           
+            text-align:center;
+            color:rgb(240, 240, 192);
+            margin-top: 20px;
+            padding: 13px;
+            font-weight: bold;
+            background-color: rgba(118, 240, 220, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>OBJECT COMPARISON</h1>
+        <input type="text" id="obj1" placeholder="Enter an object">
+        <input type="text" id="obj2" placeholder="Enter another object">
+        <button onclick="isSimilar()">Check</button>
+        <div id="output"></div>
+    </div>
+
+    <script>
+             function isSimilar() {
+            let obj1=document.getElementById('obj1').value
+            let obj2=document.getElementById('obj2').value
+    // Check if the types of obj1 and obj2 are the same
+    if (typeof obj1 !== typeof obj2) {
+      return false;
+    }
+    // Handle arrays
+    if (Array.isArray(obj1)) {
+      if (obj1.length !== obj2.length) {
+        return false;
+      }
+      for (let i = 0; i < obj1.length; i++) {
+        if (!isSimilar(obj1[i], obj2[i])) {
+          return false;
+        }
+      }
+
+  
+      return true;
+    }
+    // Handle maps
+    if (obj1 instanceof Map && obj2 instanceof Map) {
+      if (obj1.size !== obj2.size) {
+        return false;
+      }
+  
+      for (const [key, value] of obj1.entries()) {
+        if (!isSimilar(value, obj2.get(key))) {
+          return false;
+        }
+      }
+  
+      return true;
+    }
+  
+    // Handle objects
+    if (typeof obj1 === 'object' && typeof obj2 === 'object') {
+      const keys1 = Object.keys(obj1);
+      const keys2 = Object.keys(obj2);
+      if (keys1.length !== keys2.length) {
+        return false;
+      }
+  
+      for (const key of keys1) {
+        if (!obj2.hasOwnProperty(key)) {
+          return false;
+        }
+        if (!isSimilar(obj1[key], obj2[key])) {
+          return false;
+        }
+      }
+  
+      return true;
+    }
+  
+    // Handle primitive values
+//console.log(obj1 === obj2)
+
+document.getElementById('output').innerHTML=obj1===obj2
+  }
+    </script>
+</body>
+</html>

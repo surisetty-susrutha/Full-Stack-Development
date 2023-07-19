@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <title>Day-3</title>
+    <style>
+        body{
+            background-image: url('bggg.jpg');
+background-size:100%;
+            
+background-repeat: no-repeat;
+        
+        }
+   
+h1{
+    padding:30px;
+    color:antiquewhite;
+    margin-top:60px;
+    text-align:center;
+    font-family:'Times New Roman', Times, serif;
+}
+ 
+  div {
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-weight: bold;
+    color: #333;
+    display: block;
+    margin-bottom: 5px;
+   
+  }
+
+  input[type="number"],
+  input[type="text"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 50%;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-top:0px;
+    margin-left:190px;
+  }
+
+  button {
+    padding: 12px 24px;
+ 
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    border:2px solid rgb(232, 226, 226);
+    font-size: 16px;
+    margin-top:50px;
+    margin-left:250px;
+    cursor: pointer;
+    background-color: #b8ae8e;
+    transition: background-color 0.3s ease;
+  }
+
+  button:hover {
+    background-color: #4caf50;
+  }
+
+  #result-container {
+    
+ margin-right:30px;
+    width:800px;
+    height:600px;
+    float:right;
+    border:2px solid white;
+    
+   
+  }
+
+  p {
+    color:rgb(229, 244, 12);
+    text-align:center;
+    margin: 25px;
+    font-size: 20px;
+  }
+  .aa
+  {
+    border:2px solid white;
+    margin-top: 50px;
+    
+    width:600px;
+    height:500px;
+    float:left;
+  }
+  #ww
+  {
+    margin-top:40px;
+    color:rgb(231, 235, 181);
+    margin-left:30px;
+    font-size:19px;
+
+  }
+</style>
+
+    </style>
+  </head>
+  <body>
+    <h1>UNIQUE MARKS</h1>
+    <div class="box">
+        <div class="aa">
+    <div>
+       
+      <label id ='ww' for="age-input">Age:</label>
+      <input type="number" id="age-input" />
+    </div>
+    <div>
+      <label id ='ww'for="name-input">Name:</label>
+      <input type="text" id="name-input" />
+    </div>
+    <div>
+      <label id ='ww' for="marks-input">Marks:</label>
+      <input type="text" id="marks-input" />
+    </div>
+    <button onclick="submitInput()">RESULT</button>
+</div>
+    <div id="result-container"></div>
+</div>
+    <script>
+          function getObject(obj) {
+        const uniqueEntries = {};
+
+        for (const key in obj) {
+          const entry = obj[key];
+          const marks = entry.marks;
+
+          if (!uniqueEntries[marks] || entry.age > uniqueEntries[marks].age) {
+            uniqueEntries[marks] = entry;
+          }
+        }
+
+        const resultObject = {};
+        let resultIndex = 0;
+
+        for (const key in uniqueEntries) {
+          const entry = uniqueEntries[key];
+          resultObject[resultIndex] = {
+            age: entry.age,
+            name: entry.name,
+            marks: entry.marks,
+          };
+          resultIndex++;
+        }
+
+        return resultObject;
+      }
+
+      const userInput = {};
+
+      function submitInput() {
+        const ageInput = document.getElementById("age-input").value;
+        const nameInput = document.getElementById("name-input").value;
+        const marksInput = document.getElementById("marks-input").value;
+
+        const currentIndex = Object.keys(userInput).length;
+        const newEntry = {
+          age: parseInt(ageInput),
+          name: nameInput,
+          marks: marksInput,
+        };
+        let isDuplicate = false;
+        for (const key in userInput) {
+          const entry = userInput[key];
+          if (entry.marks === newEntry.marks) {
+            isDuplicate = true;
+            if (entry.age < newEntry.age) {
+              delete userInput[key];
+              break;
+            } else {
+              return;
+            }
+          }
+        }
+
+        if (!isDuplicate) {
+          userInput[currentIndex] = newEntry;
+        }
+
+        displayUsers(userInput);
+      }
+
+      function displayUsers(input) {
+        const resultContainer = document.getElementById("result-container");
+        resultContainer.innerHTML = "";
+
+        for (const key in input) {
+          const entry = input[key];
+          const resultElement = document.createElement("p");
+          resultElement.textContent = `Name: ${entry.name}, Age: ${entry.age}, Marks: ${entry.marks}`;
+          resultContainer.appendChild(resultElement);
+        }
+      }
+    </script>
+  </body>
+</html>
